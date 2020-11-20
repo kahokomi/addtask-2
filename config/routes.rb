@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   delete 'destroy/:id' => 'relationships#destroy', as: 'destroy'
   get 'follows/:id' => 'users#follows', as: 'follows'
   get 'followers/:id' => 'users#followers', as: 'followers'
+  get 'search' => 'searches#search', as: 'search'
 end

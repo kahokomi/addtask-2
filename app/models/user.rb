@@ -5,6 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :books, dependent: :destroy
+  attachment :profile_image
+
+  validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true, presence:true
+  validates :introduction, length: {maximum: 50}
+
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
 
@@ -27,8 +32,18 @@ class User < ApplicationRecord
       following_user.include?(user)
     end
 
-  attachment :profile_image
+  def self.search(search, search_word)
+    if search == "forward_match"
+      @user = User.where("name LIKE?", "#{search_word}%")
+    elsif search == "backward_match"
+      @user = User.where("name LIKE?", "%#{search_word}")
+    elsif search == "perfect_match"
+      @user = User.where("name LIKE?", "#{search_word}")
+    elsif search == "partial_match"
+      @user = User.where("name LIKE?", "%#{search_word}%")
+    else
+      @user = User.all
+    end
+  end
 
-  validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true, presence:true
-  validates :introduction, length: {maximum: 50}
 end

@@ -1,0 +1,40 @@
+<h2>Books search for "<%= params[:search_word] %>"</h2>
+<table class="table">
+  <% if @range == "2" %>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Opinion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @book.each do |book| %>
+        <tr>
+          <td><%= attachment_image_tag(book.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
+          <td><%= link_to book.title, book %></td>
+          <td><%= book.body %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+
+  <% if @range == "1" %>
+    <thead>
+      <tr>
+        <th></th>
+        <th>name</th>
+        <th>introduction</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.each do |user| %>
+      <tr>
+        <td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
+        <td><%= user.name %></td>
+        <td><%= link_to "show", user %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>
