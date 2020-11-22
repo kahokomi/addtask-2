@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-  
+
   def follows
     @user = User.find_by(params[:id])
   end
