@@ -14,11 +14,14 @@ class BooksController < ApplicationController
   end
 
   def create
+    binding.pry
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     if @book.save
+      # ThanksMailer.user_thanks_mail(current_user).deliver_now
       redirect_to book_path(@book), notice: "You have created book successfully."
     else
+      binding.pry
       @books = Book.all
       render :index
     end
