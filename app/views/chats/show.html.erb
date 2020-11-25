@@ -1,0 +1,16 @@
+<%= @user.name %> さんとのチャット
+
+  <div class="area">
+    <% @chats.each do |c| %>
+      <% if c.user_id == current_user.id %>
+        <p style="text-align: right;"><%= c.chats %></p>
+      <% else %>
+        <p style="text-align: left:"><%= c.chats %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= form_with model: @chat do |f| %>
+    <%= f.text_field :chats %>
+    <%= f.hidden_field :room_id %>
+  <% end %>

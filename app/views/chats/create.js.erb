@@ -1,1 +1,1 @@
-$("#room_<%= @room.id %> .area").html("<%= j(render 'chats/chat-area', user_rooms: @user_rooms, chats: @chats) %>");
+$('.area').append("<p style='text-align: right;'><%= @chat.chats %></p>");

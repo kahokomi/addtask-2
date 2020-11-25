@@ -1,5 +1,0 @@
-<%= form_with model:chat do |f| %>
-  <%= f.text_field :chats %>
-  <%= f.hidden_field :room_id, value: @room.id %>
-  <%= f.submit "送信" %>
-<% end %>
