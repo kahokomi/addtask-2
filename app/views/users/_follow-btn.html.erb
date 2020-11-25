@@ -1,7 +1,0 @@
-<div class="row">
-  <% if current_user.following?(user) %>
-    <td><%= link_to 'フォロー外す', destroy_path(user), method: :delete, class: "btn btn-success" %></td>
-  <% else %>
-    <td><%= link_to 'フォローする', create_path(user), method: :post, class: "btn btn-primary" %></td>
-  <% end %>
-</div>

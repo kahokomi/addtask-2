@@ -1,0 +1,8 @@
+<div id="room_<%= @room.id %>">
+  <div class="area">
+    <%= render "chats/chat-area", user_rooms: @user_rooms, chats: @chats %>
+  </div>
+  <div class="form">
+    <%= render "chats/chat-form", chat: @chat %>
+  </div>
+</div>

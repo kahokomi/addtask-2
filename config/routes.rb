@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'                                                 
+    registrations: 'users/registrations'
   }
 
   root 'homes#top'
@@ -16,4 +16,7 @@ Rails.application.routes.draw do
   get 'follows/:id' => 'users#follows', as: 'follows'
   get 'followers/:id' => 'users#followers', as: 'followers'
   get 'search' => 'searches#search', as: 'search'
+
+  resources :rooms, only: [:create, :show]
+  resources :chats, only: [:create]
 end

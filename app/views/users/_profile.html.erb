@@ -29,3 +29,33 @@
   </tr>
 </table>
 
+<% if user.id == current_user.id? %>
+	<div class="row">
+		<%= link_to '', edit_user_path(user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_#{user.id}" %>
+	</div>
+<% else %>
+	<div class="row">
+	  <% if current_user.following?(user) %>
+	    <td><%= link_to 'フォロー外す', destroy_path(user), method: :delete, class: "btn btn-success" %></td>
+	  <% else %>
+	    <td><%= link_to 'フォローする', create_path(user), method: :post, class: "btn btn-primary" %></td>
+	  <% end %>
+	</div>
+<% end %>
+
+<% if user_signed_in? %>
+	<% unless user.id == current_user.id %>
+		<% if haveRoom == true %>
+		<div class="row">
+			<%= link_to 'チャット', room_path(room) %>
+		</div>
+		<% else %>
+			<%= form_with model:room, local: true do |f| %>
+				<%= f.fields_for user_room do |e| %>
+					<%= e.hidden_field :user_id, value: user.id %>
+				<% end %>
+				<%= f.submit "チャット" %>
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>
